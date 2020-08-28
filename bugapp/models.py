@@ -24,5 +24,5 @@ class Ticket(models.Model):
     description = models.TextField()
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user_author') # Fix this maybe
     status = models.CharField(max_length=20, null=True, choices=STATUSES, default='N')
-    assigned = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL, blank=True, related_name='user_assigned')      # fix these maybe
-    finishing = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL, blank=True, related_name='user_finished')
+    assigned = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL, blank=True, related_name='user_assigned', default=None)      # fix these maybe
+    finishing = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL, blank=True, related_name='user_finished', default=None)

@@ -5,7 +5,7 @@ from myuser.models import CustomUser
 class TicketForm(forms.ModelForm):
 
     class Meta:
-        model = CustomUser
+        model = Ticket
         fields = ['title', 'description']
     
 class LoginForm(forms.Form):

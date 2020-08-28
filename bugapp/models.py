@@ -1,4 +1,5 @@
 from django.db import models
+from myuser.models import CustomUser
 from django.utils import timezone
 
 """
@@ -11,7 +12,7 @@ Name of user assigned to ticket
 Name of user who completed the ticket
 """
 
-class Ticket(models.model):
+class Ticket(models.Model):
     STATUSES = (
         ('N', 'New'),
         ('IP', 'In Progress'),
@@ -21,7 +22,7 @@ class Ticket(models.model):
     title = models.CharField(max_length=120)
     time_stamp = models.DateTimeField(default=timezone.now)
     description = models.TextField()
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE) # Fix this maybe
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user_author') # Fix this maybe
     status = models.CharField(max_length=20, null=True, choices=STATUSES, default='N')
-    assigned_user = models.TextField()      # fix these maybe
-    finishing_user = models.TextField()
+    assigned = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL, blank=True, related_name='user_assigned')      # fix these maybe
+    finishing = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL, blank=True, related_name='user_finished')

@@ -1,0 +1,13 @@
+{% if not ticket %}
+    <h1>Ticket Not Found</h1>
+{% else %}
+    <h1>{{ ticket.title }}</h1>
+    <h3>Submitted By: {{ ticket.author.username }}</h3>
+    <h3>Description: {{ticket.description}}</h3>
+    <h4>{{ticket.status}}</h4>
+    <h4>{{ticket.assigned}}</h4>
+    <h4>{{ticket.finishing}}</h4>
+    <p><a href="/assign/{{ticket.id}}"> Assign</a></p>
+    <a href="/done/{{ticket.id}}">Complete</a>
+    <a href="/invalid/{{ticket.id}}">Invalidate</a>
+{% endif %}

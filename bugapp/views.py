@@ -42,6 +42,29 @@ def login_view(request):
     form = LoginForm()
     return render(request, "generic_form.html", {"form": form})
 
+def assign_view(request, ticket_id):
+    current_ticket = Ticket.objects.get(id=ticket_id)
+    current_ticket.assigned = request.user
+    current_ticket.status = 'In Progress'
+    current_ticket.finishing = None
+    current_ticket.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def done_view(request, ticket_id):
+    current_ticket = Ticket.objects.get(id=ticket_id)
+    current_ticket.status = 'Done'
+    current_ticket.finishing = current_ticket.assigned
+    current_ticket.assigned = None
+    current_ticket.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def invalid_view(request, ticket_id):
+    current_ticket = Ticket.objects.get(id=ticket_id)
+    current_ticket.status = 'Invalid'
+    current_ticket.finishing = None
+    current_ticket.assigned = None
+    current_ticket.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def logout_view(request):
     logout(request)

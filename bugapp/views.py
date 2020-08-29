@@ -70,14 +70,14 @@ def login_view(request):
 def assign_view(request, ticket_id):
     current_ticket = Ticket.objects.get(id=ticket_id)
     current_ticket.assigned = request.user
-    current_ticket.status = 'In Progress'
+    current_ticket.status = 'IP'
     current_ticket.finishing = None
     current_ticket.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def done_view(request, ticket_id):
     current_ticket = Ticket.objects.get(id=ticket_id)
-    current_ticket.status = 'Done'
+    current_ticket.status = 'D'
     current_ticket.finishing = current_ticket.assigned
     current_ticket.assigned = None
     current_ticket.save()
@@ -85,7 +85,15 @@ def done_view(request, ticket_id):
 
 def invalid_view(request, ticket_id):
     current_ticket = Ticket.objects.get(id=ticket_id)
-    current_ticket.status = 'Invalid'
+    current_ticket.status = 'IN'
+    current_ticket.finishing = request.user
+    current_ticket.assigned = None
+    current_ticket.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def return_view(request, ticket_id):
+    current_ticket = Ticket.objects.get(id=ticket_id)
+    current_ticket.status = 'N'
     current_ticket.finishing = None
     current_ticket.assigned = None
     current_ticket.save()

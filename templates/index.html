@@ -12,7 +12,7 @@
 <div style="border:solid black">
     <ul>
 {% for ticket in progress_tickets %}
-   <li>{{ticket.title}}</li>
+<li><a href='/ticketdetail/{{ticket.id}}'>{{ticket.title}}</li></a>
 {% endfor %}
 </ul>
 </div>
@@ -21,7 +21,7 @@
 <div style="border:solid black">
     <ul>
 {% for ticket in finished_tickets %}
-   <li>{{ticket.title}}</li>
+<li><a href='/ticketdetail/{{ticket.id}}'>{{ticket.title}}</li></a>
 {% endfor %}
 </ul>
 </div>
@@ -30,7 +30,7 @@
 <div style="border:solid black">
     <ul>
 {% for ticket in invalid_tickets %}
-   <li>{{ticket.title}}</li>
+<li><a href='/ticketdetail/{{ticket.id}}'>{{ticket.title}}</li></a>
 {% endfor %}
 </ul>
 </div>

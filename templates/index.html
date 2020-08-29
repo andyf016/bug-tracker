@@ -1,0 +1,36 @@
+<h4><a href='newticket/'>CreateNew Ticket</h4></a>
+<br>
+<h2>New Tickets</h2>
+<div style="border:solid black">
+    <ul>
+{% for ticket in new_tickets %}
+   <li><a href='/ticketdetail/{{ticket.id}}'>{{ticket.title}}</li></a>
+{% endfor %}
+</ul>
+</div>
+<h2>In Progress Tickets</h2>
+<div style="border:solid black">
+    <ul>
+{% for ticket in progress_tickets %}
+   <li>{{ticket.title}}</li>
+{% endfor %}
+</ul>
+</div>
+
+<h2>Finished Tickets</h2>
+<div style="border:solid black">
+    <ul>
+{% for ticket in finished_tickets %}
+   <li>{{ticket.title}}</li>
+{% endfor %}
+</ul>
+</div>
+
+<h2>Invalid Tickets</h2>
+<div style="border:solid black">
+    <ul>
+{% for ticket in invalid_tickets %}
+   <li>{{ticket.title}}</li>
+{% endfor %}
+</ul>
+</div>

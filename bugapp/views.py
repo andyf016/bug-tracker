@@ -6,10 +6,15 @@ from bugapp.models import Ticket
 from myuser.models import CustomUser
 from bugapp.forms import TicketForm, LoginForm
 
+@login_required
 def index(request):
-    all_tickets = Ticket.objects.all()
-    return render(request, 'index.html', {'tickets': all_tickets})
+    new_tickets = Ticket.objects.filter(status="N")
+    progress_tickets = Ticket.objects.filter(status="IP")
+    finished_tickets = Ticket.objects.filter(status='D')
+    invalid_tickets = Ticket.objects.filter(status="IN")
+    return render(request, 'index.html', {'new_tickets': new_tickets, 'progress_tickets': progress_tickets, 'finished_tickets': finished_tickets, 'invalid_tickets': invalid_tickets})
 
+@login_required
 def ticket_detail_view(request, ticket_id):
     my_ticket = Ticket.objects.filter(id=ticket_id).first()
     return render(request, 'ticket_detail.html', {'ticket': my_ticket})
@@ -28,6 +33,26 @@ def ticket_form_view(request):
             return HttpResponseRedirect(reverse('home'))
     form = TicketForm()
     return render(request, "generic_form.html", {'form': form})
+
+@login_required
+def ticket_edit_view(request, ticket_id):
+    ticket = Ticket.objects.get(id=ticket_id)
+    data = {
+        "title": ticket.title,
+        "description": ticket.description
+    }
+    if request.method == "POST":
+        form = TicketForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            ticket.title = data["title"]
+            ticket.description = data["description"]
+            ticket.save()
+        return HttpResponseRedirect(reverse("details", args=[ticket.id]))
+    form = TicketForm(initial=data)
+    return render(request, "generic_form.html", {"form": form})
+
+
 
 
 def login_view(request):

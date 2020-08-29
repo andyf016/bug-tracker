@@ -19,9 +19,10 @@ from bugapp import views
 
 urlpatterns = [
     path('', views.index, name='home'),
-    path('newticket/', views.ticket_form_view, name='ticketform'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
+    path('newticket/', views.ticket_form_view, name='ticketform'),
+    path('ticketdetail/<int:ticket_id>/edit', views.ticket_edit_view, name='edit'),
     path('ticketdetail/<int:ticket_id>/', views.ticket_detail_view, name='details'),
     path('assign/<int:ticket_id>/', views.assign_view, name='assign'),
     path('invalid/<int:ticket_id>/', views.invalid_view, name='invalid'),

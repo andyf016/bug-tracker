@@ -91,6 +91,7 @@ def invalid_view(request, ticket_id):
     current_ticket.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("login"))

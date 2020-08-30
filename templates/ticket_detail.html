@@ -5,7 +5,7 @@
 {% else %}
     <h1>{{ ticket.title }}</h1>
     <h3>Ticket Number: {{ticket.id}}</h3>
-    <h3>Submitted By: {{ ticket.author.username }}</h3>
+    <a href="/author/{{ticket.id}}"><h3>Submitted By: {{ ticket.author.username }}</h3></a>
     <h4>Date Submitted: {{ticket.time_stamp}}</h4>
     <h3>Description: </h3>{{ticket.description}}
     <h4>Status: {{ticket.get_status_display}}</h4>

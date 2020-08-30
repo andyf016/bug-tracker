@@ -22,6 +22,7 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('newticket/', views.ticket_form_view, name='ticketform'),
+    path('author/<int:author_id>/', views.author_detail, name='authordetail'),
     path('ticketdetail/<int:ticket_id>/edit', views.ticket_edit_view, name='edit'),
     path('ticketdetail/<int:ticket_id>/', views.ticket_detail_view, name='details'),
     path('assign/<int:ticket_id>/', views.assign_view, name='assign'),

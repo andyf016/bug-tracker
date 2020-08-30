@@ -15,6 +15,15 @@ def index(request):
     return render(request, 'index.html', {'new_tickets': new_tickets, 'progress_tickets': progress_tickets, 'finished_tickets': finished_tickets, 'invalid_tickets': invalid_tickets})
 
 @login_required
+def author_detail(request, author_id):
+    current_author = CustomUser.objects.filter(id=author_id).first()
+    assigned_tickets = Ticket.objects.filter(assigned=current_author)
+    filed_tickets = Ticket.objects.filter(author=current_author)
+    completed_tickets = Ticket.objects.filter(finishing=current_author)
+    return render(request, 'author_detail.html', {'author': current_author, 'assigned': assigned_tickets, 'filed': filed_tickets, 'completed': completed_tickets })
+
+
+@login_required
 def ticket_detail_view(request, ticket_id):
     my_ticket = Ticket.objects.filter(id=ticket_id).first()
     return render(request, 'ticket_detail.html', {'ticket': my_ticket})

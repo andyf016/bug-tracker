@@ -76,6 +76,7 @@ def login_view(request):
     form = LoginForm()
     return render(request, "generic_form.html", {"form": form})
 
+
 def assign_view(request, ticket_id):
     current_ticket = Ticket.objects.get(id=ticket_id)
     current_ticket.assigned = request.user

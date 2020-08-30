@@ -5,6 +5,7 @@
     <ul>
 {% for ticket in new_tickets %}
    <li><a href='/ticketdetail/{{ticket.id}}'>{{ticket.title}}</li></a>
+   <ul><li>By: {{ticket.author}}</li></ul>
 {% endfor %}
 </ul>
 </div>

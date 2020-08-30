@@ -1,11 +1,11 @@
-<h4><a href='newticket/'>CreateNew Ticket</h4></a>
+<a href='newticket/'>Create New Ticket</a> | <a href='logout/'>Logout</a>
 <br>
 <h2>New Tickets</h2>
 <div style="border:solid black">
     <ul>
 {% for ticket in new_tickets %}
    <li><a href='/ticketdetail/{{ticket.id}}'>{{ticket.title}}</li></a>
-   <ul><li>By: {{ticket.author}}</li></ul>
+   <ul><li>By: <a href='/author/{{ticket.author.id}}'>{{ticket.author}}</a></li></ul>
 {% endfor %}
 </ul>
 </div>
@@ -14,6 +14,7 @@
     <ul>
 {% for ticket in progress_tickets %}
 <li><a href='/ticketdetail/{{ticket.id}}'>{{ticket.title}}</li></a>
+<ul><li>By: <a href='/author/{{ticket.author.id}}'>{{ticket.author}}</a></li></ul>
 {% endfor %}
 </ul>
 </div>
@@ -23,6 +24,7 @@
     <ul>
 {% for ticket in finished_tickets %}
 <li><a href='/ticketdetail/{{ticket.id}}'>{{ticket.title}}</li></a>
+<ul><li>By: <a href='/author/{{ticket.author.id}}'>{{ticket.author}}</a></li></ul>
 {% endfor %}
 </ul>
 </div>
@@ -32,6 +34,7 @@
     <ul>
 {% for ticket in invalid_tickets %}
 <li><a href='/ticketdetail/{{ticket.id}}'>{{ticket.title}}</li></a>
+<ul><li>By: <a href='/author/{{ticket.author.id}}'>{{ticket.author}}</a></li></ul>
 {% endfor %}
 </ul>
 </div>

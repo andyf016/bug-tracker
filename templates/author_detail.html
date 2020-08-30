@@ -1,5 +1,11 @@
+<a href="/">Home</a>
 <h1>Details for {{author}}</h1>
-
+{% if author.bio %}
+<h3>Bio</h3>
+<div style="border:solid black">
+{{author.bio}}
+</div>
+{% endif %}
 
 <h2>Assigned Tickets</h2>
 <div style="border:solid black">
